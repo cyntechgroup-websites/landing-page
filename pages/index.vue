@@ -9,12 +9,12 @@
         class="mx-auto my-12"
       />
       <h1
-        class="mx-auto text-pretty bg-gradient-to-b text-[#036] bg-clip-text text-center text-3xl leading-tight text-transparent lg:max-w-3xl lg:text-4xl"
+        class="mx-auto text-pretty bg-gradient-to-b text-[#036] bg-clip-text text-center text-3xl leading-tight lg:max-w-3xl lg:text-4xl mb-4"
       >
         Landing Page Development Placeholder
       </h1>
       <p
-        class="mx-auto mt-4 max-w-xl text-center text-lg antialiased text-[#f6c71e] bg-[#036] p-4 rounded-sm"
+        class="mx-auto mt-4 max-w-xl text-center text-lg antialiased text-[#f6c71e] bg-[#036] p-4 rounded-sm font-bold"
       >
         This is a placeholder for the landing page development.
       </p>
