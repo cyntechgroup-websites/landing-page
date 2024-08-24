@@ -69,17 +69,17 @@ const eraseWord = async () => {
 };
 
 const scrollToBottom = () => {
-  const footerSection = document.querySelector("section footer");
-  if (footerSection) {
-    const footerPosition =
-      footerSection.getBoundingClientRect().top + window.scrollY;
-    const offset = window.innerHeight;
+  const slideShowsSection = document.querySelector("section.min-h-screen");
+  if (slideShowsSection) {
+    const slideShowsPosition =
+      slideShowsSection.getBoundingClientRect().top + window.scrollY + 1;
     window.scrollTo({
-      top: footerPosition - offset,
+      top: slideShowsPosition,
       behavior: "smooth",
     });
   }
 };
+
 
 const handleMouseOver = () => {
   if (window.innerWidth >= 768) {

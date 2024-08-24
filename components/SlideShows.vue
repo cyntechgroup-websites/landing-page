@@ -1,6 +1,6 @@
 <template>
   <section
-    class="min-h-screen relative flex flex-col items-center justify-center bg-[#1b3664]"
+    class="min-h-screen relative flex flex-col items-center justify-center bg-[#1b3664] overflow-hidden"
   >
     <article
       :class="[
