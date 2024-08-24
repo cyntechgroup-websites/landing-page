@@ -1,16 +1,16 @@
 <template>
-  <div
+  <main
     class="flex flex-col items-center justify-center h-screen text-[#fdc70c]"
   >
-    <div class="text-center">
+    <header class="text-center">
       <h1 class="text-6xl font-bold mb-8">
         Welcome to
         <span class="inline-block pr-2 text-[#1b3664] cursor-blink">
           {{ currentWord }}<span class="invisible">|</span>
         </span>
       </h1>
-    </div>
-    <div
+    </header>
+    <nav
       ref="arrow"
       class="mt-12 animate-bounce cursor-pointer transition-all duration-150 md:hover:text-[#1b3664]"
       @click="scrollToBottom"
@@ -31,8 +31,8 @@
           d="M19 9l-7 7-7-7"
         ></path>
       </svg>
-    </div>
-  </div>
+    </nav>
+  </main>
 </template>
 
 <script setup>
@@ -69,10 +69,16 @@ const eraseWord = async () => {
 };
 
 const scrollToBottom = () => {
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth",
-  });
+  const footerSection = document.querySelector("section footer");
+  if (footerSection) {
+    const footerPosition =
+      footerSection.getBoundingClientRect().top + window.scrollY;
+    const offset = window.innerHeight;
+    window.scrollTo({
+      top: footerPosition - offset,
+      behavior: "smooth",
+    });
+  }
 };
 
 const handleMouseOver = () => {

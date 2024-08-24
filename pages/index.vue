@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const slideShow = ref(null);
 const isHovered = ref(false);
@@ -47,4 +47,23 @@ const handleHoverEnd = () => {
   isHovered.value = false;
   logoSrc.value = "/images/cyntech-group-logo.svg";
 };
+
+const checkScreenSize = () => {
+  if (window.innerWidth < 768) {
+    handleHoverStart();
+    handleStartSlideShow("tanks");
+  } else {
+    handleHoverEnd();
+    handleStopSlideShow();
+  }
+};
+
+onMounted(() => {
+  checkScreenSize();
+  window.addEventListener("resize", checkScreenSize);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", checkScreenSize);
+});
 </script>

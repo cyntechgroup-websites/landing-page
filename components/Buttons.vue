@@ -1,5 +1,5 @@
 <template>
-  <div
+  <section
     class="p-2 group relative flex flex-col md:flex-row items-center transition transform rounded mt-4 md:mt-8 mb-4"
   >
     <nav
@@ -20,7 +20,7 @@
         />
       </button>
     </nav>
-  </div>
+  </section>
 </template>
 
 <script setup>
