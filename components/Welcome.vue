@@ -5,17 +5,17 @@
     <div class="text-center">
       <h1 class="text-6xl font-bold mb-8">
         Welcome to
-        <span class="inline-block pr-2 text-[#1b3664] cursor-blink"
-          >{{ currentWord }}<span class="invisible">|</span></span
-        >
+        <span class="inline-block pr-2 text-[#1b3664] cursor-blink">
+          {{ currentWord }}<span class="invisible">|</span>
+        </span>
       </h1>
     </div>
     <div
       ref="arrow"
-      class="mt-12 animate-bounce cursor-pointer transition-all duration-150"
+      class="mt-12 animate-bounce cursor-pointer transition-all duration-150 md:hover:text-[#1b3664]"
       @click="scrollToBottom"
-      @mouseover="pauseBounce"
-      @mouseleave="resumeBounce"
+      @mouseover="handleMouseOver"
+      @mouseleave="handleMouseLeave"
     >
       <svg
         class="w-10 h-10"
@@ -75,6 +75,18 @@ const scrollToBottom = () => {
   });
 };
 
+const handleMouseOver = () => {
+  if (window.innerWidth >= 768) {
+    pauseBounce();
+  }
+};
+
+const handleMouseLeave = () => {
+  if (window.innerWidth >= 768) {
+    resumeBounce();
+  }
+};
+
 const pauseBounce = () => {
   arrow.value.style.animationPlayState = "paused";
   arrow.value.classList.add("text-[#1b3664]");
@@ -89,21 +101,3 @@ onMounted(() => {
   typeWord();
 });
 </script>
-
-<style>
-@keyframes blink {
-  0%,
-  100% {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #fdc70c;
-  }
-}
-
-.cursor-blink {
-  border-right-width: 2px;
-  border-right-style: solid;
-  animation: blink 1s step-start infinite;
-}
-</style>
