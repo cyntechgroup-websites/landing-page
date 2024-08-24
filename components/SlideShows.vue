@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const backgroundClass = ref('translate-x-full');
 const backgroundStyle = ref({});
@@ -21,21 +21,32 @@ let isHovering = false;
 
 const imageGalleries = {
   tanks: [
-    "url('/images/cyntech-tanks-1.jpg')",
-    "url('/images/cyntech-tanks-2.jpg')",
-    "url('/images/cyntech-tanks-3.jpg')"
+    "/images/cyntech-tanks-1.jpg",
+    "/images/cyntech-tanks-2.jpg",
+    "/images/cyntech-tanks-3.jpg"
   ],
   motionSteel: [
-    "url('/images/motion-steel-1.jpg')",
-    "url('/images/motion-steel-2.jpg')",
-    "url('/images/motion-steel-3.jpg')"
+    "/images/motion-steel-1.jpg",
+    "/images/motion-steel-2.jpg",
+    "/images/motion-steel-3.jpg"
   ],
   anchors: [
-    "url('/images/cyntech-anchors-1.jpg')",
-    "url('/images/cyntech-anchors-2.jpg')",
-    "url('/images/cyntech-anchors-3.jpg')"
+    "/images/cyntech-anchors-1.jpg",
+    "/images/cyntech-anchors-2.jpg",
+    "/images/cyntech-anchors-3.jpg"
   ]
 };
+
+const preloadImages = () => {
+  Object.values(imageGalleries).flat().forEach(imageUrl => {
+    const img = new Image();
+    img.src = imageUrl;
+  });
+};
+
+onMounted(() => {
+  preloadImages();
+});
 
 const startSlideShow = (business) => {
   clearInterval(intervalId);
@@ -46,7 +57,7 @@ const startSlideShow = (business) => {
   backgroundClass.value = 'translate-x-full';
 
   setTimeout(() => {
-    backgroundStyle.value = { backgroundImage: imageGalleries[business][currentImageIndex.value] };
+    backgroundStyle.value = { backgroundImage: `url(${imageGalleries[business][currentImageIndex.value]})` };
     backgroundClass.value = 'translate-x-0';
 
     intervalId = setInterval(() => {
@@ -55,7 +66,7 @@ const startSlideShow = (business) => {
       backgroundClass.value = 'translate-x-full';
       setTimeout(() => {
         currentImageIndex.value = (currentImageIndex.value + 1) % imageGalleries[business].length;
-        backgroundStyle.value = { backgroundImage: imageGalleries[business][currentImageIndex.value] };
+        backgroundStyle.value = { backgroundImage: `url(${imageGalleries[business][currentImageIndex.value]})` };
         backgroundClass.value = 'translate-x-0';
       }, 500);
     }, 2000);
