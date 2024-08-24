@@ -72,7 +72,7 @@ const scrollToBottom = () => {
   const imageDiv = document.querySelector("div.relative.w-full.flex.justify-center.items-center");
   if (imageDiv) {
     const imageDivPosition =
-      imageDiv.getBoundingClientRect().top + window.scrollY -1;
+      imageDiv.getBoundingClientRect().top + window.scrollY +1;
     window.scrollTo({
       top: imageDivPosition,
       behavior: "smooth",
