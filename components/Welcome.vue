@@ -72,7 +72,7 @@ const scrollToBottom = () => {
   const slideShowsSection = document.querySelector("section.min-h-screen");
   if (slideShowsSection) {
     const slideShowsPosition =
-      slideShowsSection.getBoundingClientRect().top + window.scrollY + 1;
+      slideShowsSection.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({
       top: slideShowsPosition,
       behavior: "smooth",
