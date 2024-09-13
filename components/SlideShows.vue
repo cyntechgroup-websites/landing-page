@@ -6,6 +6,7 @@
       :class="[
         'absolute inset-0 w-full h-full transition-opacity duration-300 ease-in-out bg-center bg-no-repeat bg-cover',
         backgroundClass,
+        { 'blur-lg': !isSlideFullyOpen() && !isMobile }
       ]"
       :style="backgroundStyle"
     ></article>
@@ -22,15 +23,27 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 
 const backgroundClass = ref("opacity-0");
 const backgroundStyle = ref({});
 const coverClass = ref("translate-x-0");
 const currentImageIndex = ref(0);
+const isAnimating = ref(false);
 let intervalId = null;
 let animationTimeout = null;
-let isAnimating = false;
+
+const isMobile = ref(false);
+
+const checkMobile = () => {
+  if (process.client) {
+    isMobile.value = window.innerWidth < 768;
+  }
+};
+
+const isSlideFullyOpen = () => {
+  return coverClass.value === "translate-x-full";
+};
 
 const imageGalleries = {
   tanks: [
@@ -50,27 +63,34 @@ const imageGalleries = {
   ],
 };
 
+const combinedGalleries = Object.values(imageGalleries).flat();
+
 const preloadImages = () => {
-  Object.values(imageGalleries)
-    .flat()
-    .forEach((imageUrl) => {
-      const img = new Image();
-      img.src = imageUrl;
-    });
+  combinedGalleries.forEach((imageUrl) => {
+    const img = new Image();
+    img.src = imageUrl;
+  });
 };
 
 const startSlideShow = (business) => {
   clearTimeout(animationTimeout);
   clearInterval(intervalId);
 
-  isAnimating = true;
+  isAnimating.value = true;
   currentImageIndex.value = 0;
 
-  backgroundStyle.value = {
-    backgroundImage: `url(${
-      imageGalleries[business][currentImageIndex.value]
-    })`,
-  };
+  if (isMobile.value) {
+    backgroundStyle.value = {
+      backgroundImage: `url(${combinedGalleries[currentImageIndex.value]})`,
+    };
+  } else {
+    backgroundStyle.value = {
+      backgroundImage: `url(${
+        imageGalleries[business][currentImageIndex.value]
+      })`,
+    };
+  }
+
   backgroundClass.value = "opacity-100";
   coverClass.value = "translate-x-0";
 
@@ -78,21 +98,30 @@ const startSlideShow = (business) => {
     coverClass.value = "translate-x-full";
 
     intervalId = setInterval(() => {
-      currentImageIndex.value =
-        (currentImageIndex.value + 1) % imageGalleries[business].length;
+      currentImageIndex.value = isMobile.value
+        ? (currentImageIndex.value + 1) % combinedGalleries.length
+        : (currentImageIndex.value + 1) % imageGalleries[business].length;
+
       backgroundClass.value = "opacity-0";
 
       setTimeout(() => {
-        backgroundStyle.value = {
-          backgroundImage: `url(${
-            imageGalleries[business][currentImageIndex.value]
-          })`,
-        };
+        if (isMobile.value) {
+          backgroundStyle.value = {
+            backgroundImage: `url(${combinedGalleries[currentImageIndex.value]})`,
+          };
+        } else {
+          backgroundStyle.value = {
+            backgroundImage: `url(${
+              imageGalleries[business][currentImageIndex.value]
+            })`,
+          };
+        }
+
         backgroundClass.value = "opacity-100";
       }, 300);
-    }, 2500);
+    }, 1500);
 
-    isAnimating = false;
+    isAnimating.value = false;
   }, 500);
 };
 
@@ -103,14 +132,17 @@ const stopSlideShow = () => {
   coverClass.value = "translate-x-0";
   backgroundClass.value = "opacity-0";
 
-  isAnimating = false;
+  isAnimating.value = false;
 };
 
 onMounted(() => {
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
   preloadImages();
 });
 
 onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkMobile);
   clearInterval(intervalId);
   clearTimeout(animationTimeout);
 });

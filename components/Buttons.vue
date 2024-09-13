@@ -29,7 +29,7 @@ import { ref } from "vue";
 const buttons = ref([
   {
     name: "Cyntech Tanks",
-    url: "https://www.cyntechtanks.com/en",
+    url: "https://cyntech-tanks.vercel.app/",
     icon: "cyntech-tanks-logo.svg",
     hoverIcon: "cyntech-tanks-logo-hover.svg",
     currentIcon: "cyntech-tanks-logo.svg",
