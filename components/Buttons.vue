@@ -77,6 +77,7 @@ const handleHoverEnd = (button) => {
 };
 
 const navigate = (url) => {
-  window.open(url, "_blank");
+  window.location.href = url;
 };
+
 </script>
