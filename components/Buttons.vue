@@ -79,5 +79,4 @@ const handleHoverEnd = (button) => {
 const navigate = (url) => {
   window.location.href = url;
 };
-
 </script>
