@@ -45,7 +45,7 @@ const buttons = ref([
   },
   {
     name: "Cyntech Anchors",
-    url: "#",
+    url: "https://www.cyntechgroup.com/en",
     icon: "cyntech-anchors-logo.svg",
     hoverIcon: "cyntech-anchors-logo-hover.svg",
     currentIcon: "cyntech-anchors-logo.svg",
