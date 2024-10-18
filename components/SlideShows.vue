@@ -45,7 +45,6 @@ const isSlideFullyOpen = () => {
   return coverClass.value === 'translate-x-full';
 };
 
-// Use the correct image paths relative to the public directory
 const imageGalleries = {
   tanks: [
     '/images/cyntech-tanks-1.jpg',
@@ -133,7 +132,7 @@ const stopSlideShow = () => {
 onMounted(() => {
   checkMobile();
   window.addEventListener('resize', checkMobile);
-  preloadImages(); // Ensure this runs only on the client
+  preloadImages();
 });
 
 onBeforeUnmount(() => {
