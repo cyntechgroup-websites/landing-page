@@ -48,7 +48,7 @@ const isSlideFullyOpen = () => {
 const imageGalleries = {
   tanks: [
     "/images/cyntech-tanks-1.jpg",
-    "/images/cyntech-tanks-2.png",
+    "/images/cyntech-tanks-2.jpg",
     "/images/cyntech-tanks-3.jpg",
   ],
   motionSteel: [
