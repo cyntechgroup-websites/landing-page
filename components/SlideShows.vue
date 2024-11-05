@@ -57,9 +57,9 @@ const imageGalleries = {
     '/images/motion-steel-3.jpg',
   ],
   anchors: [
-    '/images/cyntech-anchors-1.jpg',
+    '/images/cyntech-anchors-1.webp',
     '/images/cyntech-anchors-2.jpg',
-    '/images/cyntech-anchors-3.jpg',
+    '/images/cyntech-anchors-3.webp',
   ],
 };
 
@@ -113,7 +113,7 @@ const startSlideShow = (business) => {
 
         backgroundClass.value = 'opacity-100';
       }, 300);
-    }, 1500);
+    }, 2000);
 
     isAnimating.value = false;
   }, 500);

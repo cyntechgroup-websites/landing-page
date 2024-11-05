@@ -27,6 +27,14 @@
 import { ref } from "vue";
 
 const buttons = ref([
+{
+    name: "Cyntech Anchors",
+    url: "https://www.cyntechgroup.com/en",
+    icon: "cyntech-anchors-logo.svg",
+    hoverIcon: "cyntech-anchors-logo-hover.svg",
+    currentIcon: "cyntech-anchors-logo.svg",
+    type: "anchors",
+  },
   {
     name: "Cyntech Tanks",
     url: "https://cyntechtanks.com/",
@@ -42,14 +50,6 @@ const buttons = ref([
     hoverIcon: "motion-steel-logo-hover.svg",
     currentIcon: "motion-steel-logo.svg",
     type: "motionSteel",
-  },
-  {
-    name: "Cyntech Anchors",
-    url: "https://www.cyntechgroup.com/en",
-    icon: "cyntech-anchors-logo.svg",
-    hoverIcon: "cyntech-anchors-logo-hover.svg",
-    currentIcon: "cyntech-anchors-logo.svg",
-    type: "anchors",
   },
 ]);
 
